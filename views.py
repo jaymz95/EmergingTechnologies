@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template
+#from flask_bootstrap import Bootstrap
 #from .models import Comment
 
 main = Blueprint('main', __name__)
+
 
 @main.route('/')
 def index():
