@@ -32,8 +32,9 @@
     </div>
   	
     
-    <button type="submit" class="btn btn-primary">Submit</button>
-    
+    <button type="submit" onclick="myFunction()" class="btn btn-primary">Submit</button>
+    <a href="#" class="myButton"><span style=" font-weight: 400; font-family: 'Open Sans', Helvetica;	"> Predict </span></a>			
+		
     <script>
         var canvas = document.getElementById('myCanvas');
         var ctx = canvas.getContext('2d');
@@ -50,10 +51,11 @@
         mouse.y = e.pageY - this.offsetTop;
         }, false);
 
+        // draw line colour width
         ctx.lineWidth = 3;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
-        ctx.strokeStyle = '#00CC99';
+        ctx.strokeStyle = '#000000';
         
         canvas.addEventListener('mousedown', function(e) {
             ctx.beginPath();
@@ -71,6 +73,23 @@
             ctx.stroke();
         };
 
+
+    </script>
+    
+    <script src="jquery-3.4.1.min.js">
+        $(".myButton").click(function(){
+	   			var $SCRIPT_ROOT = '{{ request.script_root|tojson|safe }}';
+	   			var canvasObj = document.getElementById("myCanvas");
+	   			var img = canvasObj.toDataURL();
+	   			$.ajax({
+	   				type: "POST",
+	   				url: $SCRIPT_ROOT + "/predict/",
+	   				data: img,
+	   				success: function(data){
+	   					$('#result').text(' Predicted Output: '+data);
+	   				}
+	   			});
+	   		});
     </script>
   </body>
 </html>    
