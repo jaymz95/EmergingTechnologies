@@ -33,8 +33,13 @@
   	
     
     <button type="submit" onclick="myFunction()" class="btn btn-primary">Submit</button>
-    <a href="#" class="myButton"><span style=" font-weight: 400; font-family: 'Open Sans', Helvetica;	"> Predict </span></a>			
-		
+    <a href="#" id="myButton" class="myButton"><span style=" font-weight: 400; font-family: 'Open Sans', Helvetica;	"> Predict </span></a>			
+    <input type="button" id="clearButton" value="Clear" onclick="clearFunction()">
+    
+    <div >
+			<h1 id="result" style="margin-right:20px; margin-top:300px;float:left;"><span> </span></h1>
+		</div>
+
     <script>
         var canvas = document.getElementById('myCanvas');
         var ctx = canvas.getContext('2d');
@@ -73,23 +78,39 @@
             ctx.stroke();
         };
 
+        function clearFunction(){
+          
+          var canvas = document.querySelector( "#myCanvas" );
+	        var context = canvas.getContext( "2d" );
+        
+          context.clearRect( 0, 0, 300, 300 );
+          context.fillStyle="white";
+          context.fillRect(0,0,300,300);
+        }
 
     </script>
     
-    <script src="jquery-3.4.1.min.js">
-        $(".myButton").click(function(){
-	   			var $SCRIPT_ROOT = '{{ request.script_root|tojson|safe }}';
-	   			var canvasObj = document.getElementById("myCanvas");
-	   			var img = canvasObj.toDataURL();
-	   			$.ajax({
-	   				type: "POST",
-	   				url: $SCRIPT_ROOT + "/predict/",
-	   				data: img,
-	   				success: function(data){
-	   					$('#result').text(' Predicted Output: '+data);
-	   				}
-	   			});
-	   		});
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+
+      /*$(".myButton").click(function(){
+        var $SCRIPT_ROOT = '{{ request.script_root|tojson|safe }}';
+        var canvasObj = document.getElementById("myCanvas");
+        var img = canvasObj.toDataURL();
+        $.ajax({
+          type: "POST",
+          url: $SCRIPT_ROOT + "/predict/",
+          data: img,
+          success: function(data){
+            $('#result').text(' Predicted Output: '+data);
+          }
+        });
+      });*/
+      
+      $(function(){
+        $( "#myButton" ).click(function() {
+          alert( "Handler for .click() called." );
+        });
+      });
     </script>
   </body>
 </html>    
