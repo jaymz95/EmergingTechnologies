@@ -15,7 +15,8 @@ import os
 from flask_cors import CORS, cross_origin
 import base64
 
-from .loadModel import *
+
+from .loadModel import init
 
 #import loadModel
 #import tensorflow.keras.models
@@ -23,8 +24,9 @@ from .loadModel import *
 #import tensorflow as tf
 #from tensorflow import keras
 
-#global model, graph
-#model, graph = init()
+
+global model, graph
+model, graph = init()
 
 
 def convertImage(imgData1):
@@ -57,7 +59,15 @@ def predict():
     print("what: ")
     print(len(x))
     x = x.reshape(1, 28, 28, 1)
+    with graph.as_default():
+        #perform the prediction
+        out = model.predict(x)
+        #print(out)
+        #print(np.argmax(out,axis=1))
+        #convert the response to a string
+        response = np.array_str(np.argmax(out,axis=1))
+        return response	
 
-    
+    #in our computation graph
 
     return  render_template('index.html')
