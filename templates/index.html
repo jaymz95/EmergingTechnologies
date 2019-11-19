@@ -32,7 +32,7 @@
     </div>
   	
     
-    <button type="submit" id="ww" class="btn btn-primary">Submit</button>
+    <button type="submit" id="submit" class="btn btn-primary">Submit</button>
     <a href="#" id="myButton" class="myButton"><span style=" font-weight: 400; font-family: 'Open Sans', Helvetica;	"> Predict </span></a>			
     <div id="target">
       <input type="button" id="clearButton" class="clearButton" onclick="clearFunction()" value="Clear" >
@@ -95,19 +95,22 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
 
-      /*$(".myButton").click(function(){
+      $("#submit").click(function(){
         var $SCRIPT_ROOT = '{{ request.script_root|tojson|safe }}';
         var canvasObj = document.getElementById("myCanvas");
         var img = canvasObj.toDataURL();
+        
+        console.log( $SCRIPT_ROOT );
         $.ajax({
           type: "POST",
-          url: $SCRIPT_ROOT + "/predict/",
+          url: "http://127.0.0.1:5000/predict",
           data: img,
           success: function(data){
             $('#result').text(' Predicted Output: '+data);
           }
         });
-      });*/
+        
+      });
 
       function Click(el) {
         console.log(el)
@@ -119,16 +122,10 @@
         console.log("this: ", this);
         console.log("$(this): ", $(this));
       })
-
-      $( "#ww" ).click(function() {
+      /*
+      $( "#submit" ).click(function() {
         alert( "Handler for .click() called." );
-      });
-      
-      $(function(){
-        $( "#myButton" ).click(function() {
-          alert( "Handler for .click() called." );
-        });
-      });
+      });*/
     </script>
   </body>
 </html>    

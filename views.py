@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, render_template, request
 #from flask_bootstrap import Bootstrap
 
 #from scipy.misc import imsave, imread, imresize (outdated)
-
+import cv2
 from imageio import imread, imwrite
 from skimage.transform import resize
 import numpy as np
@@ -12,7 +12,8 @@ import sys
 import os
 #sys.path.append(os.path.abspath('./model'))
 #from loadModel import *
-
+from flask_cors import CORS, cross_origin
+import base64
 
 from .loadModel import *
 
@@ -25,10 +26,11 @@ from .loadModel import *
 #global model, graph
 #model, graph = init()
 
-def convertImage(imgData):
-    imgstr = re.search(r'base64,(.*'.imagData1).group(1)
-    with open('output.png', 'wb') as output:
-        output.write(imgstr.decode('base64'))
+
+def convertImage(imgData1):
+    imgstr = re.search(b'base64,(.*)',imgData1).group(1)
+    with open('output.png','wb') as output:
+        output.write(base64.b64decode(imgstr))
 
 main = Blueprint('main', __name__)
 
@@ -41,11 +43,21 @@ def index():
 def predict():
     imgData = request.get_data()
     convertImage(imgData)
-    x = imread('out.png', mode = 'L')
+    x = cv2.imread('output.png')
     x = np.invert(x)
-    x = resize(x, 28, 28)
+    x = cv2.resize(x, dsize=(28, 28))
+    #x = x.transpose(2,0,1).reshape(3,-1)
+    #cv2.imshow("hiya", x)
+    #x = x.reshape(28, 28)
+    print("TEST")
+    
+    print(x)
+    x = x.transpose(2,0,1).reshape(-1,x.shape[1])
+    x = cv2.resize(x, dsize=(28, 28))
+    print("what: ")
+    print(len(x))
     x = x.reshape(1, 28, 28, 1)
-    with graph.as_default():
-        out = model.predict(x)
-        response = np.array_str(np.argmax(out.png))
-        return response
+
+    
+
+    return  render_template('index.html')

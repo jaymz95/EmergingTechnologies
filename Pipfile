@@ -12,6 +12,8 @@ scikit-image = "*"
 imageio = "*"
 keras = "*"
 jquery = "*"
+flask-cors = "*"
+opencv-python = "*"
 
 [requires]
 python_version = "3.7"
