@@ -32,13 +32,15 @@
     </div>
   	
     
-    <button type="submit" onclick="myFunction()" class="btn btn-primary">Submit</button>
+    <button type="submit" id="ww" class="btn btn-primary">Submit</button>
     <a href="#" id="myButton" class="myButton"><span style=" font-weight: 400; font-family: 'Open Sans', Helvetica;	"> Predict </span></a>			
-    <input type="button" id="clearButton" value="Clear" onclick="clearFunction()">
-    
+    <div id="target">
+      <input type="button" id="clearButton" class="clearButton" onclick="clearFunction()" value="Clear" >
+    </div>
     <div >
 			<h1 id="result" style="margin-right:20px; margin-top:300px;float:left;"><span> </span></h1>
-		</div>
+    </div>
+    
 
     <script>
         var canvas = document.getElementById('myCanvas');
@@ -90,7 +92,8 @@
 
     </script>
     
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
 
       /*$(".myButton").click(function(){
         var $SCRIPT_ROOT = '{{ request.script_root|tojson|safe }}';
@@ -105,6 +108,21 @@
           }
         });
       });*/
+
+      function Click(el) {
+        console.log(el)
+      }
+
+      $(".some_class").on("click", function(e) {
+        console.log("Event: ", e);
+        console.log("Current Target of Event: ", e.currentTarget);
+        console.log("this: ", this);
+        console.log("$(this): ", $(this));
+      })
+
+      $( "#ww" ).click(function() {
+        alert( "Handler for .click() called." );
+      });
       
       $(function(){
         $( "#myButton" ).click(function() {
