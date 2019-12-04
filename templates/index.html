@@ -10,14 +10,14 @@
         border: 5px solid black;
         margin: auto;
         padding: 0px 0px 0px 0px;
-        width: 610px;
-        height: 610px;
+        width: 310px;
+        height: 310px;
         vertical-align: middle;
       }
       #paint {
         margin: auto;
-        width: 600px;
-        height: 600px;
+        width: 300px;
+        height: 300px;
         vertical-align: middle;
       }
     </style>
@@ -58,7 +58,7 @@
         }, false);
 
         // draw line colour width
-        ctx.lineWidth = 36;
+        ctx.lineWidth = 18;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
         ctx.strokeStyle = '#000000';
@@ -84,7 +84,7 @@
           var canvas = document.querySelector( "#myCanvas" );
 	        var context = canvas.getContext( "2d" );
         
-          context.clearRect( 0, 0, 600, 600 );
+          context.clearRect( 0, 0, 300, 300 );
           context.fillStyle="white";
           //context.fillRect(0,0,600,600);
         }
