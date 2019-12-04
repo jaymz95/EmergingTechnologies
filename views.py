@@ -27,8 +27,7 @@ tf.disable_v2_behavior()
 #from tensorflow import keras
 from tensorflow.keras import backend as be
 
-
-
+import matplotlib.pyplot as plt
 
 def convertImage(imgData1):
     #("yesssss: ")
@@ -48,15 +47,23 @@ def index():
 @main.route('/predict', methods=['GET', 'POST'])
 def predict():
     imgData = request.get_data()
+    
+    #plt.imshow(imgData)
+    #plt.show()
     convertImage(imgData)
-    x = cv2.imread('output.png')
-    x = np.invert(x)
-    x = cv2.resize(x, dsize=(28, 28))
+    x = imread('output.png')
+    
+    plt.imshow(x)
+    plt.show()
+    #x = np.invert(x)
+
+    x = resize(x, dsize=(28, 28))
     #x = x.transpose(2,0,1).reshape(3,-1)
     #cv2.imshow("hiya", x)
     #x = x.reshape(1, 28, 28, 1)
     print("TEST")
-    
+    plt.imshow(x)
+    plt.show()
     print(x)
     x = x.transpose(2,0,1).reshape(-1,x.shape[1])
     x = cv2.resize(x, dsize=(28, 28))
@@ -80,6 +87,7 @@ def predict():
         #print(np.argmax(out,axis=1))
         #convert the response to a string
         response = np.array_str(np.argmax(out,axis=1))
+
         return response	
 
     #in our computation graph
