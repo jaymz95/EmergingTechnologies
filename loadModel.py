@@ -32,6 +32,7 @@ def init():
   json_file.close()
   loaded_model = model_from_json(loaded_model_json)
 	#load woeights into new model
+  loaded_model.load_weights("model.h5")
 	#loaded_model.load_weights("model.h5")
   print("Loaded Model from disk")
 

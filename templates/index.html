@@ -31,14 +31,13 @@
         </div>
     </div>
   	
-    
     <button type="submit" id="submit" class="btn btn-primary">Submit</button>
     <a href="#" id="myButton" class="myButton"><span style=" font-weight: 400; font-family: 'Open Sans', Helvetica;	"> Predict </span></a>			
     <div id="target">
       <input type="button" id="clearButton" class="clearButton" onclick="clearFunction()" value="Clear" >
     </div>
     <div >
-			<h1 id="result" style="margin-top:100px;"><span> hi </span></h1>
+			<h1 id="result" style="margin-top:100px;"><span>RESULTS</span></h1>
     </div>
     
     <script>
@@ -85,9 +84,9 @@
           var canvas = document.querySelector( "#myCanvas" );
 	        var context = canvas.getContext( "2d" );
         
-          context.clearRect( 0, 0, 300, 300 );
+          context.clearRect( 0, 0, 600, 600 );
           context.fillStyle="white";
-          context.fillRect(0,0,300,300);
+          //context.fillRect(0,0,600,600);
         }
 
     </script>

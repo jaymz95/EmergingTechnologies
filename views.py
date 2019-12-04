@@ -47,16 +47,31 @@ def index():
 @main.route('/predict', methods=['GET', 'POST'])
 def predict():
     imgData = request.get_data()
+    #print(imgData.ndim)
+    #print(imgData.shape)
     
-    #plt.imshow(imgData)
-    #plt.show()
+    
     convertImage(imgData)
     x = imread('output.png')
     
-    #plt.imshow(x)
-    #plt.show()
-    #x = np.invert(x)
+    print(x.ndim)
+    print(x.shape)
+    x = np.transpose(x, axes=[2, 0, 1])
+    x = x[3]
+    
+    #x = x.convert('1')
+    #for i in range(x.shape[0]):
+    #    print(x[i].shape)
+    #    x = x[i]
 
+    #x1 = x[0]
+    #plt.imshow(x, cmap= plt.cm.binary)
+    #plt.show()
+    #plt.imshow(x[1])
+    #plt.show()
+    x = np.invert(x)
+    print(x.ndim)
+    print(x.shape)
     x = resize(x, (28, 28))
     #x = rescale(x, 0.5).shape
 
@@ -65,20 +80,28 @@ def predict():
     #x = x.reshape(1, 28, 28, 1)
     print("TEST")
     
-    print(x)
+    print(x.ndim)
+    print(x.shape)
     #x = x.transpose(2,0,1).reshape(-1,x.shape[1])
+    print(x.ndim)
+    print(x.shape)
+    print("TEST2")
+
     #x = cv2.resize(x, dsize=(28, 28))
-    #x = resize(x, (28, 28))
+    x = resize(x, (28, 28))
     #plt.imshow(x)
     #plt.show()
-    x = resize(x, (14, 14))
+    #x = resize(x, (28, 28))
     print("what: ")
     print(len(x))
     
-    plt.imshow(x)
-    plt.show()
+    #plt.imshow(x)
+    #plt.show()
     x = x.reshape(1, 28, 28, 1)
-
+    
+    print(x.ndim)
+    print(x.shape)
+    print(x)
 
     global model, graph
     model, graph = init()
