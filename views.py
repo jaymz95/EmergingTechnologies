@@ -4,7 +4,7 @@ from flask import Flask, Blueprint, render_template, request
 #from scipy.misc import imsave, imread, imresize (outdated)
 import cv2
 from imageio import imread, imwrite
-from skimage.transform import resize
+from skimage.transform import resize, rescale
 import numpy as np
 #import keras.models
 import re
@@ -53,24 +53,33 @@ def predict():
     convertImage(imgData)
     x = imread('output.png')
     
-    plt.imshow(x)
-    plt.show()
+    #plt.imshow(x)
+    #plt.show()
     #x = np.invert(x)
 
-    x = resize(x, dsize=(28, 28))
+    x = resize(x, (28, 28))
+    #x = rescale(x, 0.5).shape
+
     #x = x.transpose(2,0,1).reshape(3,-1)
     #cv2.imshow("hiya", x)
     #x = x.reshape(1, 28, 28, 1)
     print("TEST")
-    plt.imshow(x)
-    plt.show()
+    
     print(x)
-    x = x.transpose(2,0,1).reshape(-1,x.shape[1])
-    x = cv2.resize(x, dsize=(28, 28))
+    #x = x.transpose(2,0,1).reshape(-1,x.shape[1])
+    #x = cv2.resize(x, dsize=(28, 28))
+    #x = resize(x, (28, 28))
+    #plt.imshow(x)
+    #plt.show()
+    x = resize(x, (14, 14))
     print("what: ")
     print(len(x))
-    x = x.reshape(1, 28, 28, 1)
     
+    plt.imshow(x)
+    plt.show()
+    x = x.reshape(1, 28, 28, 1)
+
+
     global model, graph
     model, graph = init()
     model._make_predict_function()
