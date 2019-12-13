@@ -1,4 +1,16 @@
-# EmergingTechnologies
+# Emerging Technologies Project
+## By James Mullarkey
+
+## To Run the Web App, Run these commands in the project folder:
+#### pipenv shell
+#### cd ..
+#### set FLASK_APP=EmergingTechProject
+#### set FLASK_DEBUG=1
+#### flask run
+
+
+## To Run the Jupyter Notbook, Run this commands in the project folder:
+#### Jupyter Notebook
 
 
 # References for flask
